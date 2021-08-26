@@ -1,9 +1,21 @@
 const http = require('http');
 const fs = require('fs');
 //file system module
+const _ = require('lodash');
 
 const server = http.createServer((req,res) => {
     console.log(req.url, req.method)
+
+    //lodash
+    const num = _.random(0, 20);
+    console.log(num);
+
+    const greet = _.once(() => {
+        console.log('hello');
+    });
+
+    greet();
+    greet();
 
     //set header content type
     //1.브라우저로 보내는 데이터 타입 명시
@@ -33,7 +45,7 @@ const server = http.createServer((req,res) => {
             path += 'about.html';
             res.statusCode = 200;
             break;
-        case '/about-us':
+        case '/about-blah':
             //page redirect
             res.statusCode = 301;
             res.setHeader('Location', '/about')
