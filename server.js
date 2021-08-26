@@ -20,7 +20,33 @@ const server = http.createServer((req,res) => {
     //     }
     // })
 
-    fs.readFile('./views/index.html', (err, data) => {
+    
+    //page router
+    //status code 200 success
+    let path = './views/';
+    switch (req.url) {
+        case '/':
+            path += 'index.html';
+            res.statusCode = 200;
+            break;
+        case '/about':
+            path += 'about.html';
+            res.statusCode = 200;
+            break;
+        case '/about-us':
+            //page redirect
+            res.statusCode = 301;
+            res.setHeader('Location', '/about')
+            res.end();
+            break;
+        default:
+            path += '404.html';
+            res.statusCode = 404;
+            break;
+        
+    }
+
+    fs.readFile(path, (err, data) => {
         if (err) {
             console.log(err);
             res.end();
@@ -30,7 +56,6 @@ const server = http.createServer((req,res) => {
             res.end(data);
         }
     })
-
 
     //2.브라우저에 표시될 메시지
     // res.write('<head><link rel="stylesheet" href="#"/></head>')
