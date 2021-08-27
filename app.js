@@ -1,9 +1,7 @@
-const {john,susan} = require('./4-names');
-const greeting = require('./5-utils')
+const {readFileSync,writeFileSync} = require('fs');
 
 
+const first = readFileSync('./contents/first.txt', 'utf8')
+const second = readFileSync('./contents/second.txt', 'utf8')
 
-greeting(susan);
-greeting(john);
-
-
+console.log(first,second)
